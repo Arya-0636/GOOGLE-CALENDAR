@@ -1,0 +1,36 @@
+
+
+import { CalendarProvider, useCalendar } from './context/CalendarContext';
+import CalendarHeader from './components/CalendarHeader';
+import MonthView from './components/MonthView';
+import WeekView from './components/WeekView';
+import DayView from './components/DayView';
+import EventModal from './components/EventModal';
+import FloatingActionButton from './components/FloatingActionButton';
+
+function CalendarContent() {
+  const { viewType } = useCalendar();
+
+  return (
+    <div className="h-screen flex flex-col bg-white">
+      <CalendarHeader />
+      <div className="flex-1 overflow-hidden">
+        {viewType === 'month' && <MonthView />}
+        {viewType === 'week' && <WeekView />}
+        {viewType === 'day' && <DayView />}
+      </div>
+      <EventModal />
+      <FloatingActionButton />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <CalendarProvider>
+      <CalendarContent />
+    </CalendarProvider>
+  );
+}
+
+export default App;
